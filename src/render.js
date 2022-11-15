@@ -2,6 +2,11 @@ const btnS = document.getElementById("btnS");
 const btnE = document.getElementById("btnE");
 const text = document.getElementById("text");
 
+const socket = new WebSocket("ws://localhost:1234");
+socket.addEventListener("message", ({ data }) => {
+  text.innerHTML = data;
+});
+
 btnS.onclick = yes;
 btnE.onclick = no;
 
@@ -10,8 +15,11 @@ globals.t = () => {};
 
 function yes() {
   globals.t = setInterval(() => {
-    text.innerText = document.getElementById("tinput").value;
-  }, 1000);
+    const socket = new WebSocket("ws://localhost:1234");
+    socket.addEventListener("message", ({ data }) => {
+      text.innerHTML = data;
+    });
+  }, 500);
 }
 
 function no() {
